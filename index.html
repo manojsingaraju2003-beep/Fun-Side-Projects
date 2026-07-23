@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Survey Form</title>
+  </head>
+
+  <body>
+    <h1 id="title">Is Manoj the GOAT?</h1>
+    <p id="description">The survey that helps our reviewers determine whether the popular consensus on Manoj is whether he's the GOAT or not.</p>
+    <form id="survey-form" action="https://formspree.io/f/mojgnbgl" method="POST">
+      <label for="name" id="name-label">ENTER YOUR NAME:</label>
+      <input required name="name" id="name" type="text" placeholder="Enter your name pookie"></input><br>
+ </br>     
+      <label for="email" id="email-label">ENTER YOUR EMAIL:</label>
+      <input required id="email" type="email" placeholder="loser@noonelovesme.com" name="email"></input><br>
+      
+</br>      
+      <label for="number" id="number-label">Age (lowk optional)</label>
+      <input id="number" type="number" min="1" max="100" placeholder="67" name="number"><br>
+
+</br>
+
+      <label for="dropdown" id="dropdown-label">Is Manoj the GOAT?</label>
+      <select id="dropdown" name="goat-answer">
+        <option>Yes</option>
+        <option>No :(</option>
+      </select></br>
+
+      </br>
+
+      <fieldset class="form-group">
+        <legend>If you chose "No :( ", how sure are you about your answer?</legend>
+        <input type="radio" name="not-sure" value="totally-unsure">Totally Unsure</input>
+        <input type="radio" name="not-sure" value="what-am-i-doing">What Am I Even Doing?</input>
+        <input type="radio" name="not-sure" value="clicked-wrong">Misclick</input>
+      </fieldset>
+</br>
+      <fieldset>
+        <legend>What words would you use to describe Manoj?</legend>
+        <input type="checkbox" value="marvellous" name="descriptions">Marvellous</input>
+        <input type="checkbox" value="magnificent" name="descriptions">Magnificent</input>
+        <input type="checkbox" value="mogger" name="descriptions">Mogger</input>
+        <input type="checkbox" value="Manojilicious" name="descriptions">Manojilicious</input>
+        <input type="checkbox" value="Manoj" name="descriptions">Manoj</input>
+      </fieldset>
+</br>
+      <fieldset>
+        <legend>Comments?</legend>
+        <textarea name="comments" required minlength="1" maxlength="2" placeholder="Type anywhere from 1 to 2 characters"></textarea>
+      </fieldset>
+</br>
+      <button id="submit" type="submit" name="submit"> Submit Survey </button>
+      </form>
+
+
+
+      
+
+
+
+
+    
+
+
+      
+
+
+      
+  </body>
+</html>
