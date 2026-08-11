@@ -2,67 +2,138 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Survey Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A Quiz to determine how knowledgeable you are about Lebron James" />
+    <title>Lebron James Quiz</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
-  <section>
     <header>
-    <h1 id="title">Is Lebron the GOAT?</h1>
-    <p id="description">The survey that helps our reviewers determine whether the popular consensus on Lebron is whether he's the GOAT or not.</p>
-    <form id="survey-form" action="https://formspree.io/f/mojgnbgl" method="POST">
-    </header> 
-  
+      <img id="face" alt="lebron" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFFGr4m5KYz9MBc6OTGIXmj2FdmVzHN-qJTkRqp7ZZfUCU8eKr3nznWIju&s=10">
+      <h1>THE Lebron James Quiz</h1>
+      <nav>
+        <ul>
+          <li><a href="#participant-info">Participant Info</a></li>
+          <li><a href="#lebron-questions">Lebron Questions</a></li>
+          <li><a href="#lebron-opinions">Lebron Opinions</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <form method="post" action="https://formspree.io/f/mojgnbgl">
+        <section role="region" aria-labelledby="participant-info">
+          <h2 id="participant-info">Participant Info</h2>
+          <div class="info">
+            <label for="participant-name">Name:</label>
+            <input type="text" name="participant-name" id="participant-name" required/>
+          </div>
+          <div class="info">
+            <label for="participant-email">Email:</label>
+            <input type="email" name="participant-email" id="participant-email" />
+          </div>
+          <div class="info">
+            <label for="birth-date">Date of Birth:</label>
+            <input type="date" name="birth-date" id="birth-date" />
+          </div>
+        </section>
+        <section role="region" aria-labelledby="lebron-questions">
+          <h2 id="lebron-questions">Lebron Questions</h2>
+          <div class="question-block">
+            <h3><span class="sr-only">Question</span>1</h3>
+            <fieldset class="question" name="html-question-one">
+              <legend>
+                Lebron James is the leader in all-time points scored in the NBA?
+              </legend>
+              <ul class="answers-list">
+                <li>
+                  <label for="q1-a1">
+                    <input type="radio" id="q1-a1" name="q1" value="true" />
+                    True
+                  </label>
+                </li>
+                <li>
+                  <label for="q1-a2">
+                    <input type="radio" id="q1-a2" name="q1" value="false" />
+                    False
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+          <div class="question-block">
+            <h3><span class="sr-only">Question</span>2</h3>
+            <fieldset class="question" name="html-question-two">
+              <legend>
+                Lebron James did not need Scottie Pippen to win his first NBA championship.
+              </legend>
+              <ul class="answers-list">
+                <li>
+                  <label for="q2-a1">
+                    <input type="radio" id="q2-a1" name="q2" value="true" />
+                    True
+                  </label>
+                </li>
+                <li>
+                  <label for="q2-a2">
+                    <input type="radio" id="q2-a2" name="q2" value="false" />
+                    False
+                  </label>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+        </section>
+ <section role="region" aria-labelledby="lebron-opinions">
+  <h2 id="lebron-opinions">LeBron Opinions</h2>
 
-    <fieldset class="name">
-      <label for="name" id="name-label">Enter your name:</label>
-      <input required name="name" id="name" type="text" placeholder="Enter your name dawg"></input>
-    </fieldset>
+  <div class="formrow">
+    <div class="question-block">
+      <label for="selector">Is LeBron the GOAT?</label>
+    </div>
 
-    <fieldset class="email">
-      <label for="email" id="email-label">Enter your email:</label>
-      <input id="email" type="email" placeholder="lebron@james.com" name="email"></input>
-    </fieldset>
-    
-    <fieldset class="number">
-      <label for="number" id="number-label">Age (lowk optional)</label>
-      <input id="number" type="number" min="1" max="100" placeholder="67" name="number">
-    </fieldset>
+    <div class="answer">
+      <select name="selector" id="selector" required>
+        <option value="">Select an option</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
 
-    <fieldset class="dropdown">
-      <label for="dropdown" id="dropdown-label">Is Lebron the GOAT?</label>
-      <select id="dropdown" name="goat-answer">
-        <option>Yes</option>
-        <option>No :(</option>
-      </select></br>
-    </fieldset>
- 
-      <fieldset class="radio">
-        <legend>If you chose "No :( ", how sure are you about your answer?</legend>
-        <input type="radio" name="not-sure" value="totally-unsure">Totally Unsure</input>
-        <input type="radio" name="not-sure" value="what-am-i-doing">What Am I Even Doing?</input>
-        <input type="radio" name="not-sure" value="clicked-wrong">Misclick</input>
-      </fieldset>
+    <div class="question-block">
+      <label id="follow-up-label" for="lebron-textarea">
+        Select an answer to see the next question.
+      </label>
+    </div>
 
-      <fieldset class="checkbox">
-        <legend>What words would you use to describe Lebron?</legend>
-        <input type="checkbox" value="LeLegendary" name="descriptions">LeLegendary</input>
-        <input type="checkbox" value="LeBeautiful" name="descriptions">LeBeautiful</input>
-        <input type="checkbox" value="LeAmazing" name="descriptions">LeAmazing</input>
-        <input checked type="checkbox" value="LeGOAT" name="descriptions">LeGOAT</input>
-        <input required type="checkbox" value="Lebron" name="descriptions">Lebron</input>
-      </fieldset>
-  
-      <fieldset class="comments">
-        <legend>Comments?</legend>
-        <textarea name="comments" minlength="1" maxlength="200" placeholder="Type anywhere from 1 to 200 characters"></textarea>
-      </fieldset>
+    <div class="answer">
+      <textarea
+        id="lebron-textarea"
+        name="lebron-opinions"
+        rows="5"
+        cols="24"
+      ></textarea>
+    </div>
+  </div>
+</section>
 
+<script>
+  const selector = document.querySelector("#selector");
+  const followUpLabel = document.querySelector("#follow-up-label");
 
-    </section>      
-    <button id="submit" type="submit" name="submit"> Submit Survey </button>
+  selector.addEventListener("change", () => {
+    if (selector.value === "yes") {
+      followUpLabel.textContent =
+        "How do you feel about being right?";
+    } else if (selector.value === "no") {
+      followUpLabel.textContent =
+        "How do you feel about being wrong?";
+    } else {
+      followUpLabel.textContent =
+        "Select an answer to see the next question.";
+    }
+  });
+</script>
+        <button type="submit">Send</button>
       </form>
-
   </body>
 </html>
