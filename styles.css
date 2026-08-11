@@ -79,10 +79,10 @@ button {
 }
 
 body {
-  background: #f5f6f7;
   color: #1b1b32;
-  font-family: Helvetica;
+  font-family: Helvetica, sans-serif;
   margin: 0;
+  min-height: 100vh;
 }
 
 header {
@@ -143,6 +143,17 @@ li > a {
 
 main {
   padding-top: 50px;
+    background:
+    linear-gradient(
+      rgba(245, 246, 247, 0.8),
+      rgba(245, 246, 247, 0.8)
+    ),
+    url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/70a2b46c-e6cc-42e3-b8b5-7ec3a704e4b3/d9g9uwh-acb7068c-71c3-43d9-8913-d1f3305450d5.jpg/v1/fill/w_1000,h_664,q_75,strp/lebron_james_wallpaper_by_hps74_d9g9uwh-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjY0IiwicGF0aCI6Ii9mLzcwYTJiNDZjLWU2Y2MtNDJlMy1iOGI1LTdlYzNhNzA0ZTRiMy9kOWc5dXdoLWFjYjcwNjhjLTcxYzMtNDNkOS04OTEzLWQxZjMzMDU0NTBkNS5qcGciLCJ3aWR0aCI6Ijw9MTAwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.FIZ7M7anIxtqgaik1kgBWb9JNIKFm8bz75XsAyjat0s);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 section {
