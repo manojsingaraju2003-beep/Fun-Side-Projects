@@ -250,6 +250,22 @@ button:active {
     transition: 0.5s ease-in-out;
 }
 
+button a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button a:hover {
+    background-color: #002B5C;
+    color: #d0d0d5;
+    transition: 0.5s ease-in-out;
+}
+
+button a:active {
+    transform: scale(0.95);
+    transition: 0.5s ease-in-out;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -260,4 +276,24 @@ button:active {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.question-block, .answer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.highlight-video {
+  display: block;
+  width: min(900px, 90%);
+  margin: 30px auto;
+  border-radius: 12px;
+  background-color: black;
+}
+
+#thank-you {
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
