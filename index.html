@@ -3,172 +3,185 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A Quiz to determine how knowledgeable you are about Lebron James" />
-    <title>Lebron James Quiz</title>
+    <meta name="description" content="Take your shot, unlock the court and test your LeBron James knowledge." />
+    <meta name="theme-color" content="#030b17" />
+    <title>The LeBron James Quiz | King's Court</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <header>
-      <img id="face" alt="lebron" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFFGr4m5KYz9MBc6OTGIXmj2FdmVzHN-qJTkRqp7ZZfUCU8eKr3nznWIju&s=10">
-      <h1>THE Lebron James Quiz</h1>
-      <nav>
-        <ul>
-          <li><a href="#participant-info">Participant Info</a></li>
-          <li><a href="#lebron-questions">Lebron Questions</a></li>
-          <li><a href="#lebron-opinions">Lebron Opinions</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <form id="lebron-form">
-        <section role="region" aria-labelledby="participant-info">
-          <h2 id="participant-info">Participant Info</h2>
-          <div class="info">
-            <label for="participant-name">Name:</label>
-            <input type="text" name="participant-name" id="participant-name" required/>
+    <!-- Visitors must make one basket before the quiz unlocks. -->
+    <section class="game-gate" id="game-gate" aria-labelledby="game-title">
+      <header class="game-header">
+        <a class="wordmark" href="index.html" aria-label="King's Court home"><span>LBJ</span><strong>23</strong></a>
+        <p>Unofficial fan quiz</p>
+      </header>
+
+      <div class="game-copy">
+        <p class="eyebrow">The King’s Court · Entry challenge</p>
+        <h1 id="game-title">Earn your <span>entry.</span></h1>
+        <p>Drag the ball backwards and release to shoot. Make one basket to unlock the LeBron James quiz.</p>
+      </div>
+
+      <div class="court-shell">
+        <div class="scoreboard" aria-live="polite">
+          <span>Attempts</span>
+          <strong id="attempt-count">00</strong>
+          <span class="scoreboard-message" id="game-status">Ball in hand</span>
+        </div>
+
+        <canvas
+          id="basketball-game"
+          width="900"
+          height="520"
+          tabindex="0"
+          aria-label="Basketball shooting game. Drag backwards from the ball and release, or use the arrow keys to adjust the shot and press Space to shoot."
+        ></canvas>
+
+        <div class="game-controls">
+          <p>
+            <span>Drag back · Release to shoot</span>
+            <span>Arrows aim · Space shoots</span>
+          </p>
+          <button class="court-button" id="shoot-button" type="button">Take the shot</button>
+          <button class="text-button" id="reset-button" type="button">Reset ball</button>
+        </div>
+      </div>
+
+      <div class="bucket-message" id="bucket-message" aria-live="assertive">
+        <span>Swish</span>
+        <strong>Quiz unlocked</strong>
+      </div>
+    </section>
+
+    <!-- Hidden until the player makes the opening basket. -->
+    <main class="quiz-app" id="quiz-app" hidden tabindex="-1">
+      <header class="quiz-header">
+        <a class="wordmark" href="index.html" aria-label="Restart King's Court"><span>LBJ</span><strong>23</strong></a>
+        <div class="quiz-header-meta">
+          <span id="header-player-name">New player</span>
+          <button class="text-button" id="restart-quiz" type="button">Restart</button>
+        </div>
+      </header>
+
+      <section class="welcome-screen quiz-view" id="welcome-screen">
+        <div class="welcome-copy">
+          <p class="eyebrow">You’re cleared for tip-off</p>
+          <h2>How well do you know <span>the King?</span></h2>
+        </div>
+
+        <figure class="welcome-portrait">
+          <img src="images/lebron-sixers.jpg" alt="Philadelphia 76ers announcement welcoming LeBron James" />
+        </figure>
+
+        <form class="player-form" id="player-form">
+          <label for="player-name">Choose your scoreboard name</label>
+          <div class="player-input-row">
+            <input id="player-name" name="player-name" type="text" maxlength="24" autocomplete="nickname" placeholder="Player name" required />
+            <button class="primary-button" type="submit">Start quiz</button>
           </div>
-          <div class="info">
-            <label for="participant-email">Email:</label>
-            <input type="email" name="participant-email" id="participant-email" />
+          <p>No email, date of birth or account required.</p>
+        </form>
+      </section>
+
+      <!-- One question is rendered here at a time by quiz.js. -->
+      <section class="question-screen quiz-view" id="question-screen" hidden>
+        <div class="quiz-progress-row">
+          <p id="question-counter">Question 01 / 08</p>
+          <p>Score <strong id="live-score">00</strong></p>
+        </div>
+
+        <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="quiz-progress">
+          <span id="quiz-progress-fill"></span>
+        </div>
+
+        <article class="question-card">
+          <div class="question-lead">
+            <div>
+              <p class="eyebrow" id="question-category">Career</p>
+              <h2 id="question-text" tabindex="-1">Question text</h2>
+            </div>
+            <figure class="question-photo">
+              <img id="question-image" src="images/lebron-cavaliers.jpg" alt="" />
+              <figcaption id="question-image-caption">Cleveland era</figcaption>
+            </figure>
           </div>
-          <div class="info">
-            <label for="birth-date">Date of Birth:</label>
-            <input type="date" name="birth-date" id="birth-date" />
+          <div class="answer-grid" id="answer-grid"></div>
+          <div class="answer-feedback" id="answer-feedback" aria-live="polite"></div>
+          <div class="question-actions">
+            <button class="primary-button" id="next-question" type="button" hidden>Next question</button>
           </div>
-        </section>
-        <section role="region" aria-labelledby="lebron-questions">
-          <h2 id="lebron-questions">Lebron Questions</h2>
-          <div class="question-block">
-            <h3><span class="sr-only">Question</span>1</h3>
-            <fieldset class="question" name="html-question-one">
-              <legend>
-                Lebron James is the leader in all-time points scored in the NBA?
-              </legend>
-              <ul class="answers-list">
-                <li>
-                  <label for="q1-a1">
-                    <input type="radio" id="q1-a1" name="q1" value="true" />
-                    True
-                  </label>
-                </li>
-                <li>
-                  <label for="q1-a2">
-                    <input type="radio" id="q1-a2" name="q1" value="false" />
-                    False
-                  </label>
-                </li>
-              </ul>
-            </fieldset>
+        </article>
+      </section>
+
+      <!-- This final opinion is intentionally unscored—the joke changes with the answer. -->
+      <section class="opinion-screen quiz-view" id="opinion-screen" hidden>
+        <form class="goat-form" id="goat-form" action="https://formspree.io/f/mojgnbgl" method="POST">
+          <input type="hidden" name="participant-name" id="submission-player-name" />
+          <input type="hidden" name="quiz-score" id="submission-score" />
+          <input type="hidden" name="selector" id="goat-choice" />
+
+          <div class="goat-copy">
+            <p class="eyebrow">One final question · Unscored</p>
+            <h2>Is LeBron <span>the GOAT?</span></h2>
+            <p>Choose carefully. The court has opinions.</p>
+
+            <div class="goat-options" id="goat-options" role="group" aria-label="Is LeBron the greatest of all time?">
+              <button type="button" data-goat-choice="yes">Yes, obviously</button>
+              <button type="button" data-goat-choice="no">No</button>
+            </div>
+
+            <div class="goat-follow-up" id="goat-follow-up" hidden>
+              <label id="goat-follow-up-label" for="goat-response">Tell us more.</label>
+              <textarea id="goat-response" name="lebron-opinions" rows="4" maxlength="500" placeholder="Make your case..."></textarea>
+              <button class="primary-button" id="finish-quiz" type="submit">Submit take &amp; see score</button>
+              <p class="form-status" id="form-status" aria-live="polite"></p>
+            </div>
           </div>
-          <div class="question-block">
-            <h3><span class="sr-only">Question</span>2</h3>
-            <fieldset class="question" name="html-question-two">
-              <legend>
-                Lebron James did not need Scottie Pippen to win his first NBA championship.
-              </legend>
-              <ul class="answers-list">
-                <li>
-                  <label for="q2-a1">
-                    <input type="radio" id="q2-a1" name="q2" value="true" />
-                    True
-                  </label>
-                </li>
-                <li>
-                  <label for="q2-a2">
-                    <input type="radio" id="q2-a2" name="q2" value="false" />
-                    False
-                  </label>
-                </li>
-              </ul>
-            </fieldset>
+
+          <figure class="goat-photo">
+            <img src="images/lebron-heat.jpg" alt="LeBron James playing for the Miami Heat" />
+            <figcaption>Choose wisely.</figcaption>
+          </figure>
+        </form>
+      </section>
+
+      <section class="result-screen quiz-view" id="result-screen" hidden>
+        <div class="result-number">
+          <strong id="final-score">0</strong>
+          <span id="final-total">/ 8</span>
+        </div>
+
+        <div class="result-copy">
+          <p class="eyebrow">Final buzzer</p>
+          <h2 id="result-title">All-Star</h2>
+          <p id="result-description">You know the King.</p>
+          <div class="result-actions">
+            <button class="primary-button" id="play-again" type="button">Run it back</button>
+            <button class="secondary-button" id="share-score" type="button">Share score</button>
+            <a class="secondary-button" href="highlights.html">Watch highlights</a>
           </div>
-        </section>
- <section role="region" aria-labelledby="lebron-opinions">
-  <h2 id="lebron-opinions">LeBron Opinions</h2>
+          <p class="share-feedback" id="share-feedback" aria-live="polite"></p>
+        </div>
+      </section>
 
-  <div class="formrow">
-    <div class="question-block">
-      <label for="selector">Is LeBron the GOAT?</label>
-    </div>
-
-    <div class="answer">
-      <select name="selector" id="selector" required>
-        <option value="">Select an option</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-    </div>
-
-    <div class="question-block">
-      <label id="follow-up-label" for="lebron-textarea">
-        Select an answer to see the next question.
-      </label>
-    </div>
-
-    <div class="answer">
-      <textarea
-        id="lebron-textarea"
-        name="lebron-opinions"
-        rows="5"
-        cols="24"
-      ></textarea>
-    </div>
-  </div>
-</section>
-
-<script>
-  const selector = document.querySelector("#selector");
-  const followUpLabel = document.querySelector("#follow-up-label");
-
-  selector.addEventListener("change", () => {
-    if (selector.value === "yes") {
-      followUpLabel.textContent =
-        "How do you feel about being right?";
-    } else if (selector.value === "no") {
-      followUpLabel.textContent =
-        "How do you feel about being wrong?";
-    } else {
-      followUpLabel.textContent =
-        "Select an answer to see the next question.";
-    }
-  });
-</script>
-        <button type="submit" id="send-button">Send</button>
-      </form>
-  <script>
-    const form = document.getElementById("lebron-form");
-    const sendButton = document.getElementById("send-button");
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      sendButton.disabled = true;
-      sendButton.textContent = "Sending...";
-
-      try {
-        const response = await fetch(
-          "https://formspree.io/f/mojgnbgl",
-          {
-            method: "POST",
-            body: new FormData(form),
-            headers: {
-              Accept: "application/json"
-            }
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Form submission failed");
-        }
-
-        window.location.href = "highlights.html";
-      } catch (error) {
-        alert("Your answers could not be sent. Please try again.");
-        sendButton.disabled = false;
-        sendButton.textContent = "Send";
-      }
-    });
-  </script>
+      <footer class="site-footer">
+        <p>Built for basketball fans · Not affiliated with LeBron James or the NBA</p>
+        <p class="photo-credit">
+          Photos:
+          <a href="https://www.nba.com/sixers/news/philadelphia-76ers-sign-4x-nba-champion-and-22x-all-star-lebron-james" target="_blank" rel="noopener noreferrer">Philadelphia 76ers</a>,
+          <a href="https://commons.wikimedia.org/wiki/File:LeBron_James_2018_Cleveland_Cavaliers.jpg" target="_blank" rel="noopener noreferrer">Erik Drost</a> &amp;
+          <a href="https://commons.wikimedia.org/wiki/File:LeBronJamesMiamiHeat2010.jpg" target="_blank" rel="noopener noreferrer">Keith Allison</a>
+        </p>
+        <p>© <span id="current-year"></span> King’s Court</p>
+      </footer>
     </main>
+
+    <noscript><p class="noscript-message">This basketball game and quiz require JavaScript to run.</p></noscript>
+    <script src="game.js" defer></script>
+    <script src="quiz.js" defer></script>
   </body>
 </html>
