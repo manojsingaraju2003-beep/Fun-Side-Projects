@@ -70,7 +70,6 @@ const questionPhotos = [
   {
     src: "images/lebron-lakers.jpg",
     alt: "LeBron James smiling in a Los Angeles Lakers uniform",
-    caption: "Record-breaking era",
     format: "portrait",
     width: 500,
     height: 820
@@ -78,7 +77,6 @@ const questionPhotos = [
   {
     src: "images/lebron-cavaliers.jpg",
     alt: "LeBron James on court for the Cleveland Cavaliers",
-    caption: "Cleveland’s No. 1 pick",
     format: "landscape",
     width: 960,
     height: 640
@@ -86,7 +84,6 @@ const questionPhotos = [
   {
     src: "images/lebron-heat.jpg",
     alt: "LeBron James on court for the Miami Heat",
-    caption: "First title · Miami",
     format: "portrait",
     width: 500,
     height: 828
@@ -94,7 +91,6 @@ const questionPhotos = [
   {
     src: "images/akron-skyline.jpg",
     alt: "The evening skyline of Akron, Ohio",
-    caption: "Akron, Ohio",
     format: "wide",
     width: 960,
     height: 444
@@ -102,7 +98,6 @@ const questionPhotos = [
   {
     src: "images/cavaliers-2016-parade.jpg",
     alt: "Crowds celebrating Cleveland’s 2016 NBA championship",
-    caption: "Cleveland · 2016",
     format: "landscape",
     width: 960,
     height: 640
@@ -110,7 +105,6 @@ const questionPhotos = [
   {
     src: "images/st-vincent-st-mary.jpg",
     alt: "The gym at St. Vincent–St. Mary High School in Akron",
-    caption: "St. Vincent–St. Mary",
     format: "wide",
     width: 960,
     height: 540
@@ -118,7 +112,6 @@ const questionPhotos = [
   {
     src: "images/space-jam-new-legacy.jpeg",
     alt: "You Are My Sunshine LeBron James meme",
-    caption: "You are my sunshine",
     format: "logo",
     width: 500,
     height: 500
@@ -126,7 +119,6 @@ const questionPhotos = [
   {
     src: "images/scottie-pippen.jpg",
     alt: "Portrait of Scottie Pippen",
-    caption: "Nice try, MJ fans",
     format: "portrait",
     width: 500,
     height: 677
@@ -148,7 +140,6 @@ const questionCategory = document.querySelector("#question-category");
 const questionText = document.querySelector("#question-text");
 const questionImage = document.querySelector("#question-image");
 const questionPhoto = questionImage?.closest(".question-photo");
-const questionImageCaption = document.querySelector("#question-image-caption");
 const answerGrid = document.querySelector("#answer-grid");
 const answerFeedback = document.querySelector("#answer-feedback");
 const nextQuestionButton = document.querySelector("#next-question");
@@ -209,7 +200,6 @@ function renderQuestion() {
   questionImage.width = currentPhoto.width;
   questionImage.height = currentPhoto.height;
   if (questionPhoto) questionPhoto.dataset.format = currentPhoto.format;
-  questionImageCaption.textContent = currentPhoto.caption;
   questionCounter.textContent = `Question ${paddedNumber(questionNumber)} / ${paddedNumber(questions.length)}`;
   liveScore.textContent = paddedNumber(score);
   progressFill.style.width = `${progress}%`;

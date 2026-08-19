@@ -605,12 +605,6 @@ h2 span {
   padding: clamp(0.85rem, 2vw, 1.4rem);
 }
 
-.question-photo[data-format="logo"] figcaption {
-  padding: 0.2rem 0.4rem;
-  color: var(--ink);
-  background: rgba(247, 249, 252, 0.88);
-}
-
 .question-photo[data-format="portrait"] {
   aspect-ratio: 4 / 3;
 }
@@ -619,7 +613,6 @@ h2 span {
   padding: 0.35rem;
 }
 
-.question-photo figcaption,
 .goat-photo figcaption {
   position: absolute;
   right: 0.8rem;
