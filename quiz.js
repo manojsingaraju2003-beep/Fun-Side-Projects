@@ -69,56 +69,49 @@ const questions = [
 const questionPhotos = [
   {
     src: "images/lebron-lakers.jpg",
-    alt: "LeBron James smiling in a Los Angeles Lakers uniform",
-    caption: "Record-breaking era",
+    alt: "LeBron James smiling in a Los Angeles Lakers uniform",,
     format: "portrait",
     width: 500,
     height: 820
   },
   {
     src: "images/lebron-cavaliers.jpg",
-    alt: "LeBron James on court for the Cleveland Cavaliers",
-    caption: "Cleveland’s No. 1 pick",
+    alt: "LeBron James on court for the Cleveland Cavaliers",,
     format: "landscape",
     width: 960,
     height: 640
   },
   {
     src: "images/lebron-heat.jpg",
-    alt: "LeBron James on court for the Miami Heat",
-    caption: "First title · Miami",
+    alt: "LeBron James on court for the Miami Heat",,
     format: "portrait",
     width: 500,
     height: 828
   },
   {
     src: "images/akron-skyline.jpg",
-    alt: "The evening skyline of Akron, Ohio",
-    caption: "Akron, Ohio",
+    alt: "The evening skyline of Akron, Ohio",,
     format: "wide",
     width: 960,
     height: 444
   },
   {
     src: "images/cavaliers-2016-parade.jpg",
-    alt: "Crowds celebrating Cleveland’s 2016 NBA championship",
-    caption: "Cleveland · 2016",
+    alt: "Crowds celebrating Cleveland’s 2016 NBA championship",,
     format: "landscape",
     width: 960,
     height: 640
   },
   {
     src: "images/st-vincent-st-mary.jpg",
-    alt: "The gym at St. Vincent–St. Mary High School in Akron",
-    caption: "St. Vincent–St. Mary",
+    alt: "The gym at St. Vincent–St. Mary High School in Akron",,
     format: "wide",
     width: 960,
     height: 540
   },
   {
-    src: "images/space-jam-new-legacy.png",
+    src: "images/space-jam-new-legacy.jpeg",
     alt: "Space Jam: A New Legacy logo",
-    caption: "A New Legacy · 2021",
     format: "logo",
     width: 960,
     height: 868
