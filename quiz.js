@@ -68,9 +68,17 @@ const questions = [
 // let CSS reserve the correct frame without stretching or cropping each source.
 const questionPhotos = [
   {
+    src: "images/lebron-lakers.jpg",
+    alt: "LeBron James smiling in a Los Angeles Lakers uniform",
+    caption: "Record-breaking era",
+    format: "portrait",
+    width: 500,
+    height: 820
+  },
+  {
     src: "images/lebron-cavaliers.jpg",
     alt: "LeBron James on court for the Cleveland Cavaliers",
-    caption: "Cleveland era",
+    caption: "Cleveland’s No. 1 pick",
     format: "landscape",
     width: 960,
     height: 640
@@ -78,18 +86,50 @@ const questionPhotos = [
   {
     src: "images/lebron-heat.jpg",
     alt: "LeBron James on court for the Miami Heat",
-    caption: "Miami era",
+    caption: "First title · Miami",
     format: "portrait",
     width: 500,
     height: 828
   },
   {
-    src: "images/lebron-sixers.jpg",
-    alt: "Philadelphia 76ers announcement welcoming LeBron James",
-    caption: "Philadelphia era",
-    format: "graphic",
-    width: 1280,
-    height: 720
+    src: "images/akron-skyline.jpg",
+    alt: "The evening skyline of Akron, Ohio",
+    caption: "Akron, Ohio",
+    format: "wide",
+    width: 960,
+    height: 444
+  },
+  {
+    src: "images/cavaliers-2016-parade.jpg",
+    alt: "Crowds celebrating Cleveland’s 2016 NBA championship",
+    caption: "Cleveland · 2016",
+    format: "landscape",
+    width: 960,
+    height: 640
+  },
+  {
+    src: "images/st-vincent-st-mary.jpg",
+    alt: "The gym at St. Vincent–St. Mary High School in Akron",
+    caption: "St. Vincent–St. Mary",
+    format: "wide",
+    width: 960,
+    height: 540
+  },
+  {
+    src: "images/space-jam-new-legacy.png",
+    alt: "Space Jam: A New Legacy logo",
+    caption: "A New Legacy · 2021",
+    format: "logo",
+    width: 960,
+    height: 868
+  },
+  {
+    src: "images/scottie-pippen.jpg",
+    alt: "Portrait of Scottie Pippen",
+    caption: "Nice try, MJ fans",
+    format: "portrait",
+    width: 500,
+    height: 677
   }
 ];
 
@@ -155,7 +195,7 @@ function showOnly(view) {
 
 function renderQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
-  const currentPhoto = questionPhotos[currentQuestionIndex % questionPhotos.length];
+  const currentPhoto = questionPhotos[currentQuestionIndex];
   const questionNumber = currentQuestionIndex + 1;
   const progress = (currentQuestionIndex / questions.length) * 100;
 

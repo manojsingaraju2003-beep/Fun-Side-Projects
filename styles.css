@@ -588,6 +588,29 @@ h2 span {
   aspect-ratio: 16 / 9;
 }
 
+.question-photo[data-format="wide"] {
+  aspect-ratio: 16 / 9;
+}
+
+.question-photo[data-format="logo"] {
+  aspect-ratio: 4 / 3;
+  background: #f7f9fc;
+}
+
+.question-photo[data-format="logo"]::after {
+  display: none;
+}
+
+.question-photo[data-format="logo"] img {
+  padding: clamp(0.85rem, 2vw, 1.4rem);
+}
+
+.question-photo[data-format="logo"] figcaption {
+  padding: 0.2rem 0.4rem;
+  color: var(--ink);
+  background: rgba(247, 249, 252, 0.88);
+}
+
 .question-photo[data-format="portrait"] {
   aspect-ratio: 4 / 3;
 }
@@ -832,6 +855,7 @@ h2 span {
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  flex-wrap: wrap;
 }
 
 .site-footer p {
@@ -840,6 +864,12 @@ h2 span {
 
 .site-footer a {
   color: var(--paper);
+}
+
+.site-footer .photo-credit {
+  flex: 1 1 100%;
+  order: 3;
+  line-height: 1.7;
 }
 
 .noscript-message {
