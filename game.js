@@ -38,7 +38,8 @@ if (canvas && context) {
   let isDragging = false;
   let dragPoint = { x: start.x - 70, y: start.y + 80 };
   let keyboardAngle = 55;
-  let keyboardPower = 14;
+  let keyboardPower = 11;
+  let storedDragVelocity = null;
   let resetCountdown = 0;
   let gameUnlocked = false;
   let lastTimestamp = performance.now();
@@ -59,6 +60,27 @@ if (canvas && context) {
     if (attemptCount) {
       attemptCount.textContent = String(attempts).padStart(2, "0");
     }
+  }
+
+  function randomizeDefaultAim() {
+    // Keep the untouched button shot deliberately short, but vary it so the
+    // opening challenge does not feel scripted or unlock on a single tap.
+    keyboardAngle = Math.round(44 + Math.random() * 20);
+    keyboardPower = Number((9.4 + Math.random() * 2.2).toFixed(1));
+    storedDragVelocity = null;
+  }
+
+  function rememberDragAim(velocityX, velocityY) {
+    // Store the released drag as the new preview. Without this, mobile users
+    // briefly saw their chosen arc snap back to the original keyboard preset.
+    storedDragVelocity = {
+      x: Math.min(velocityX, 15.5),
+      y: Math.max(velocityY, -17.5)
+    };
+    const speed = Math.hypot(storedDragVelocity.x, storedDragVelocity.y);
+    const angle = Math.atan2(-storedDragVelocity.y, storedDragVelocity.x) * (180 / Math.PI);
+    keyboardAngle = Math.max(35, Math.min(75, Math.round(angle)));
+    keyboardPower = Math.max(7, Math.min(18, Number(speed.toFixed(1))));
   }
 
   function resetBall(message = "Ball in hand") {
@@ -95,6 +117,11 @@ if (canvas && context) {
   }
 
   function shootKeyboardPreset() {
+    if (storedDragVelocity) {
+      shoot(storedDragVelocity.x, storedDragVelocity.y);
+      return;
+    }
+
     const radians = (keyboardAngle * Math.PI) / 180;
     const velocityX = keyboardPower * Math.cos(radians);
     const velocityY = -keyboardPower * Math.sin(radians);
@@ -135,6 +162,7 @@ if (canvas && context) {
 
     if (distanceFromBall > 72) return;
 
+    event.preventDefault();
     isDragging = true;
     dragPoint = point;
     canvas.classList.add("is-aiming");
@@ -144,6 +172,7 @@ if (canvas && context) {
 
   function updateDragging(event) {
     if (!isDragging) return;
+    event.preventDefault();
     dragPoint = pointerPosition(event);
 
     // Keep the drag point behind and beneath the basketball.
@@ -154,12 +183,20 @@ if (canvas && context) {
   function releaseDragging(event) {
     if (!isDragging) return;
 
-    updateDragging(event);
+    event.preventDefault();
+
+    // pointercancel is common when a thumb slips beyond the canvas. Use the
+    // last recorded point so that the intended mobile shot still releases.
+    if (event.type !== "pointercancel") updateDragging(event);
     isDragging = false;
     canvas.classList.remove("is-aiming");
+    if (canvas.hasPointerCapture?.(event.pointerId)) {
+      canvas.releasePointerCapture(event.pointerId);
+    }
 
     const velocityX = (ball.x - dragPoint.x) * 0.115;
     const velocityY = (ball.y - dragPoint.y) * 0.145;
+    rememberDragAim(velocityX, velocityY);
     shoot(velocityX, velocityY);
   }
 
@@ -341,6 +378,8 @@ if (canvas && context) {
       };
     }
 
+    if (storedDragVelocity) return storedDragVelocity;
+
     const radians = (keyboardAngle * Math.PI) / 180;
     return {
       x: keyboardPower * Math.cos(radians),
@@ -430,18 +469,19 @@ if (canvas && context) {
   canvas.addEventListener("pointerdown", startDragging);
   canvas.addEventListener("pointermove", updateDragging);
   canvas.addEventListener("pointerup", releaseDragging);
-  canvas.addEventListener("pointercancel", () => {
-    isDragging = false;
-    canvas.classList.remove("is-aiming");
-  });
+  canvas.addEventListener("pointercancel", releaseDragging);
 
   canvas.addEventListener("keydown", (event) => {
     if (ball.inFlight || gameUnlocked) return;
 
+    if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
+      storedDragVelocity = null;
+    }
+
     if (event.key === "ArrowLeft") keyboardAngle = Math.min(75, keyboardAngle + 2);
     if (event.key === "ArrowRight") keyboardAngle = Math.max(35, keyboardAngle - 2);
     if (event.key === "ArrowUp") keyboardPower = Math.min(18, keyboardPower + 0.4);
-    if (event.key === "ArrowDown") keyboardPower = Math.max(9, keyboardPower - 0.4);
+    if (event.key === "ArrowDown") keyboardPower = Math.max(7, keyboardPower - 0.4);
     if (event.key === " " || event.key === "Enter") shootKeyboardPreset();
 
     if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " ", "Enter"].includes(event.key)) {
@@ -451,8 +491,12 @@ if (canvas && context) {
   });
 
   shootButton?.addEventListener("click", shootKeyboardPreset);
-  resetButton?.addEventListener("click", () => resetBall());
+  resetButton?.addEventListener("click", () => {
+    randomizeDefaultAim();
+    resetBall();
+  });
 
+  randomizeDefaultAim();
   updateAttemptDisplay();
   draw();
   window.requestAnimationFrame(animationLoop);
