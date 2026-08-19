@@ -64,22 +64,32 @@ const questions = [
   }
 ];
 
-// These locally stored, Creative Commons photos rotate with the questions.
+// These locally stored images rotate with the questions. Format and dimensions
+// let CSS reserve the correct frame without stretching or cropping each source.
 const questionPhotos = [
   {
     src: "images/lebron-cavaliers.jpg",
     alt: "LeBron James on court for the Cleveland Cavaliers",
-    caption: "Cleveland era"
+    caption: "Cleveland era",
+    format: "landscape",
+    width: 960,
+    height: 640
   },
   {
     src: "images/lebron-heat.jpg",
     alt: "LeBron James on court for the Miami Heat",
-    caption: "Miami era"
+    caption: "Miami era",
+    format: "portrait",
+    width: 500,
+    height: 828
   },
   {
     src: "images/lebron-sixers.jpg",
     alt: "Philadelphia 76ers announcement welcoming LeBron James",
-    caption: "Philadelphia era"
+    caption: "Philadelphia era",
+    format: "graphic",
+    width: 1280,
+    height: 720
   }
 ];
 
@@ -97,6 +107,7 @@ const progressFill = document.querySelector("#quiz-progress-fill");
 const questionCategory = document.querySelector("#question-category");
 const questionText = document.querySelector("#question-text");
 const questionImage = document.querySelector("#question-image");
+const questionPhoto = questionImage?.closest(".question-photo");
 const questionImageCaption = document.querySelector("#question-image-caption");
 const answerGrid = document.querySelector("#answer-grid");
 const answerFeedback = document.querySelector("#answer-feedback");
@@ -155,6 +166,9 @@ function renderQuestion() {
   questionText.textContent = currentQuestion.question;
   questionImage.src = currentPhoto.src;
   questionImage.alt = currentPhoto.alt;
+  questionImage.width = currentPhoto.width;
+  questionImage.height = currentPhoto.height;
+  if (questionPhoto) questionPhoto.dataset.format = currentPhoto.format;
   questionImageCaption.textContent = currentPhoto.caption;
   questionCounter.textContent = `Question ${paddedNumber(questionNumber)} / ${paddedNumber(questions.length)}`;
   liveScore.textContent = paddedNumber(score);
