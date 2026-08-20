@@ -802,20 +802,26 @@ h2 span {
 
 .result-number {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
+  gap: clamp(0.85rem, 2vw, 1.75rem);
+  min-width: 0;
   color: var(--gold);
   font-family: var(--display);
 }
 
 .result-number strong {
-  font-size: clamp(10rem, 27vw, 24rem);
+  display: block;
+  font-size: clamp(9rem, 22vw, 20rem);
   font-weight: 400;
-  letter-spacing: -0.08em;
-  line-height: 0.7;
+  letter-spacing: -0.04em;
+  line-height: 0.78;
 }
 
 .result-number span {
   font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1;
+  padding-bottom: clamp(0.45rem, 1.4vw, 1.25rem);
+  white-space: nowrap;
 }
 
 .result-copy > p:not(.eyebrow, .share-feedback) {
@@ -971,7 +977,7 @@ h2 span {
   }
 
   .result-number strong {
-    font-size: clamp(9rem, 44vw, 18rem);
+    font-size: clamp(8rem, 36vw, 15rem);
   }
 
   .highlight-hero {
